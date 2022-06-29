@@ -92,3 +92,31 @@ if (error) {
 } else {
   printf("Ok");
 }
+
+//функция считывания ряда с ввода и записывание его в одномерный массив с
+//передвижением указателя
+int check_integer(int *error, int *d, int *length) {
+  char ch;
+  int i = 0;
+  do {
+    double id;
+    int cd;
+    if (scanf("%lf", &id) == 1) {
+      if (id > 9) {
+        *error = 1;
+      }
+      cd = id;
+      if ((cd > 0) && ((cd == id) || ((fabs(0 - id) <= 1e-6)))) {
+        *d = cd;
+        d++;
+        i++;
+      } else {
+        *error = 1;
+      }
+    } else {
+      *error = 1;
+    }
+    *length = i;
+    ch = getchar();
+  } while (ch == ' ');
+}
