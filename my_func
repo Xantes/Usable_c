@@ -1,0 +1,94 @@
+
+// working functions
+
+// проверка на целое число. Записывает в указатель *d
+int check_integer(int *d) {
+  int cd;
+  double id;
+  if (scanf("%lf", &id) == 1) {
+    cd = id;
+    if ((cd == id) || ((fabs(0 - id) <= 1e-6))) {
+      *d = cd;
+      return 0;
+    } else {
+      return 1;
+    }
+  }
+  return 1;
+}
+// проверка на целое положительное число. Записывает в указатель *d
+int check_u_integer(int *d) {
+  int cd;
+  double id;
+  if (scanf("%lf", &id) == 1) {
+    cd = id;
+    if ((cd > 0) && ((cd == id) || ((fabs(0 - id) <= 1e-6)))) {
+      *d = cd;
+      return 0;
+    } else {
+      return 1;
+    }
+  }
+  return 1;
+}
+
+// запрашивает длину массива и записывает данные в массив *data через функцию
+// проверки
+int input(int *data, int *length) {
+  if (check_u_integer(length)) {
+    return 1;
+  }
+  if (*length > NMAX) {
+    return 1;
+  }
+  for (int *p = data; p - data < *length; p++) {
+    if (check_integer(p)) {
+      return 1;
+      break;
+    }
+  }
+  return 0;
+}
+//выводит заданный в *buffer массив
+void output(int *buffer, int length) {
+  for (int i = 0; i < length; i++) {
+    if (i == length - 1) {
+      printf("%d", buffer[i]);
+    } else {
+      printf("%d ", buffer[i]);
+    }
+  }
+}
+
+// блок, который считывает ввод с клавиатуры до символа ввода и анализирует.
+// Если число не соответсвует 0-9, то записывает 1 в переменную error. После
+// проверяется переменная и если в ней есть какое-то значение, выкидывается n/a
+// и программа завершается
+int error = 0;
+
+int check_integer(int *error) {
+  do {
+    double lf;
+    int cd;
+    if (scanf("%lf", &id) == 1) {
+      if (id > 9) {
+        *error = 1;
+      }
+      cd = id;
+      if ((cd > 0) && ((cd == id) || ((fabs(0 - id) <= 1e-6)))) {
+        // printf("%d ", cd);
+      } else {
+        *error = 1;
+      }
+    } else {
+      *error = 1;
+    }
+  } while (getchar() == ' ');
+}
+
+check_integer(&error);
+if (error) {
+  printf("n/a");
+} else {
+  printf("Ok");
+}
